@@ -53,4 +53,11 @@ I wanted a quick way to mute myself, leave calls, and toggle video without hunti
 |------|-----|
 | Case Bottom | 1 |
 | Case Top | 1 |
+<img width="1186" height="796" alt="image" src="https://github.com/user-attachments/assets/86c1d77b-93d8-450e-acd4-4c5583ef56d4" />
+<img width="757" height="423" alt="image" src="https://github.com/user-attachments/assets/7c55ffd9-3023-44f2-88af-ad0ee6636174" />
+<img width="1407" height="772" alt="image" src="https://github.com/user-attachments/assets/46c12222-0a1d-4684-b867-7fd4492058df" />
+<img width="1472" height="683" alt="image" src="https://github.com/user-attachments/assets/1ccc5139-fb55-4eae-8005-ccb99db0fdb3" />
+
+
+
 
