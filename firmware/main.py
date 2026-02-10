@@ -1,185 +1,172 @@
-# Discord Macro Board - Complete with Animated OLED Display
-# KMK Firmware for XIAO RP2040
-
-import board
-import busio
 import time
-from kmk.kmk_keyboard import KMKKeyboard
-from kmk.scanners.keypad import KeysScanner
-from kmk.keys import KC
-from kmk.modules.encoder import EncoderHandler
+import board
+import digitalio
+import rotaryio
+import neopixel
+import busio
+from adafruit_ssd1306 import SSD1306_I2C
+from adafruit_hid.keyboard import Keyboard
+from adafruit_hid.keycode import Keycode
+from adafruit_hid.consumer_control import ConsumerControl
+from adafruit_hid.consumer_control_code import ConsumerControlCode
+import usb_hid
 
-# ============ OLED SETUP ============
-try:
-    i2c = busio.I2C(board.D7, board.D6)  # SCL=D7, SDA=D6
-    import adafruit_ssd1306
-    from PIL import Image, ImageDraw, ImageFont
-    
-    display = adafruit_ssd1306.SSD1306_I2C(128, 64, i2c)
-    oled_available = True
-except:
-    oled_available = False
-    print("OLED not found - continuing without display")
+# ---------- USB HID ----------
+kbd = Keyboard(usb_hid.devices)
+cc = ConsumerControl(usb_hid.devices)
 
-# ============ GLOBAL VARIABLES ============
-mute_status = False
-volume_level = 50
-last_button_press = ""
-button_press_time = 0
-animation_frame = 0
+# ---------- PINS (XIAO RP2040) ----------
+# Buttons
+PIN_MUTE        = board.GP26
+PIN_LEAVE_CALL  = board.GP27
+PIN_CAMERA      = board.GP28
+PIN_SHARE       = board.GP29
 
-# ============ OLED DISPLAY FUNCTIONS ============
-def draw_startup_animation():
-    """Animated Discord circle startup"""
-    if not oled_available:
-        return
-    
-    image = Image.new('1', (128, 64))
-    draw = ImageDraw.Draw(image)
-    
-    # Draw animated circle expanding
-    for frame in range(5):
-        image = Image.new('1', (128, 64))
-        draw = ImageDraw.Draw(image)
-        radius = 5 + (frame * 3)
-        draw.ellipse([(64-radius, 32-radius), (64+radius, 32+radius)], outline=255)
-        display.image(image)
-        display.show()
-        time.sleep(0.1)
+# Encoder
+PIN_ENC_A       = board.GP6
+PIN_ENC_B       = board.GP7
+PIN_ENC_BTN     = board.GP0
 
-def draw_main_display():
-    """Display main status with animations"""
-    if not oled_available:
-        return
-    
-    global animation_frame
-    animation_frame = (animation_frame + 1) % 20
-    
-    image = Image.new('1', (128, 64))
-    draw = ImageDraw.Draw(image)
-    
-    # Top bar - animated border
-    border_y = 12
-    draw.line([(0, border_y), (128, border_y)], fill=255, width=1)
-    
-    # Status line 1: Microphone status
-    mic_icon = "🎤" if mute_status else "🔊"
-    mic_text = "MIC: OFF" if mute_status else "MIC: ACTIVE"
-    draw.text((5, 18), mic_text, fill=255)
-    
-    # Animated pulsing indicator for mute status
-    pulse = abs((animation_frame % 10) - 5) // 2
-    draw.ellipse([(120-pulse, 20-pulse), (125+pulse, 25+pulse)], outline=255)
-    
-    # Status line 2: Volume level
-    vol_bar_width = int((volume_level / 100) * 80)
-    draw.rectangle([(5, 32), (85, 38)], outline=255)
-    draw.rectangle([(5, 32), (5+vol_bar_width, 38)], fill=255)
-    draw.text((90, 32), f"{volume_level}%", fill=255)
-    
-    # Status line 3: Last action
-    if button_press_time > 0 and time.time() - button_press_time < 2:
-        draw.text((5, 45), f"Action: {last_button_press}", fill=255)
-        # Animated checkmark
-        if animation_frame % 10 < 5:
-            draw.text((120, 45), "✓", fill=255)
-    else:
-        draw.text((5, 45), "Ready", fill=255)
-    
-    display.image(image)
-    display.show()
+# LEDs (SK6812)
+PIN_LEDS        = board.GP3
+NUM_LEDS        = 2
 
-# ============ KEYBOARD SETUP ============
-keyboard = KMKKeyboard()
+# OLED I2C
+PIN_OLED_SCL    = board.GP4
+PIN_OLED_SDA    = board.GP2
+OLED_WIDTH      = 128
+OLED_HEIGHT     = 32
 
-# Define GPIO pins for switches
-PINS = [
-    board.D26,  # SW1 - Mute Mic
-    board.D27,  # SW2 - Leave Call
-    board.D28,  # SW3 - Camera On/Off
-    board.D29,  # SW4 - Screen Share
-]
+# ---------- BUTTON SETUP ----------
+def make_button(pin):
+    b = digitalio.DigitalInOut(pin)
+    b.switch_to_input(pull=digitalio.Pull.UP)  # active low
+    return b
 
-# Set up key scanner
-keyboard.matrix = KeysScanner(
-    pins=PINS,
-    value_when_pressed=False,
-)
+btn_mute       = make_button(PIN_MUTE)
+btn_leave      = make_button(PIN_LEAVE_CALL)
+btn_camera     = make_button(PIN_CAMERA)
+btn_share      = make_button(PIN_SHARE)
+btn_enc        = make_button(PIN_ENC_BTN)
 
-# Add encoder support
-encoder_handler = EncoderHandler()
-keyboard.modules.append(encoder_handler)
-encoder_handler.encoders.append((board.D2, board.D1, None))
+# Last states for edge detection
+last_mute = last_leave = last_camera = last_share = last_enc = True
 
-# Define keyboard layout
-keyboard.keymap = [
-    [
-        KC.MUTE,                    # SW1
-        KC.LCTRL(KC.ALT(KC.D)),     # SW2
-        KC.LCTRL(KC.SHIFT(KC.M)),   # SW3
-        KC.LCTRL(KC.SHIFT(KC.S)),   # SW4
-    ]
-]
+# ---------- ROTARY ENCODER ----------
+encoder = rotaryio.IncrementalEncoder(PIN_ENC_A, PIN_ENC_B)
+last_position = encoder.position
 
-# ============ KEY PRESS CALLBACK ============
-def on_key_press(key):
-    """Update display when button is pressed"""
-    global mute_status, last_button_press, button_press_time
-    
-    button_press_time = time.time()
-    
-    if key == KC.MUTE:
-        mute_status = not mute_status
-        last_button_press = "MUTE" if mute_status else "UNMUTE"
-    elif key == KC.LCTRL(KC.ALT(KC.D)):
-        last_button_press = "LEAVE"
-    elif key == KC.LCTRL(KC.SHIFT(KC.M)):
-        last_button_press = "CAMERA"
-    elif key == KC.LCTRL(KC.SHIFT(KC.S)):
-        last_button_press = "SCREEN"
+# ---------- NEOPIXELS ----------
+pixels = neopixel.NeoPixel(PIN_LEDS, NUM_LEDS, brightness=0.3, auto_write=True, pixel_order=neopixel.GRB)
 
-# Override process_key to track presses
-original_process = keyboard.process_key
-def tracked_process(key, is_pressed):
-    if is_pressed:
-        on_key_press(key)
-    return original_process(key, is_pressed)
-keyboard.process_key = tracked_process
+def set_status_leds(mic_on, cam_on):
+    # LED0 = mic status, LED1 = camera status
+    pixels[0] = (0, 255, 0) if mic_on else (255, 0, 0)   # green = on, red = muted
+    pixels[1] = (0, 255, 255) if cam_on else (255, 0, 255)
 
-# ============ ENCODER CALLBACK ============
-def encoder_callback(keyboard, direction, accel_time):
-    global volume_level, last_button_press, button_press_time
-    
-    if direction == 1:  # Clockwise
-        volume_level = min(100, volume_level + 5)
-        keyboard.send(KC.VOLU)
-    else:  # Counter-clockwise
-        volume_level = max(0, volume_level - 5)
-        keyboard.send(KC.VOLD)
-    
-    last_button_press = "VOLUME"
-    button_press_time = time.time()
+# ---------- OLED ----------
+i2c = busio.I2C(PIN_OLED_SCL, PIN_OLED_SDA)
+oled = SSD1306_I2C(OLED_WIDTH, OLED_HEIGHT, i2c)
 
-encoder_handler.callbacks.append(encoder_callback)
+def oled_status(mic_on, cam_on, sharing, volume):
+    oled.fill(0)
+    oled.text(f"Mic:   {'ON'  if mic_on else 'MUTE'}", 0, 0, 1)
+    oled.text(f"Cam:   {'ON'  if cam_on else 'OFF'}", 0, 10, 1)
+    oled.text(f"Share: {'ON'  if sharing else 'OFF'}", 0, 20, 1)
+    # Very rough volume display
+    oled.text(f"Vol: {volume}", 70, 20, 1)
+    oled.show()
 
-# ============ STARTUP ============
-draw_startup_animation()
-time.sleep(0.5)
+# ---------- STATE ----------
+mic_on = True
+cam_on = True
+sharing = False
+volume_level = 50  # just for display, 0–100
 
-# ============ MAIN LOOP ============
-def update_display_task():
-    """Update OLED display constantly"""
-    while True:
-        draw_main_display()
-        time.sleep(0.1)
+set_status_leds(mic_on, cam_on)
+oled_status(mic_on, cam_on, sharing, volume_level)
 
-# Start keyboard
-if __name__ == "__main__":
-    import threading
-    
-    # Start display update thread
-    if oled_available:
-        display_thread = threading.Thread(target=update_display_task, daemon=True)
-        display_thread.start()
-    
-    keyboard.go()
+# ---------- HELPER: SEND SHORTCUTS ----------
+# Change these key combos to match your Discord hotkeys
+def send_mute_toggle():
+    # Example: Ctrl+Shift+M
+    kbd.send(Keycode.CONTROL, Keycode.SHIFT, Keycode.M)
+
+def send_leave_call():
+    # Example: Ctrl+Shift+H (set this in Discord keybinds)
+    kbd.send(Keycode.CONTROL, Keycode.SHIFT, Keycode.H)
+
+def send_camera_toggle():
+    # Example: Ctrl+Shift+V
+    kbd.send(Keycode.CONTROL, Keycode.SHIFT, Keycode.V)
+
+def send_share_toggle():
+    # Example: Ctrl+Shift+S
+    kbd.send(Keycode.CONTROL, Keycode.SHIFT, Keycode.S)
+
+# ---------- MAIN LOOP ----------
+while True:
+    # ----- Buttons (edge detect, active low) -----
+    now_mute   = btn_mute.value
+    now_leave  = btn_leave.value
+    now_cam    = btn_camera.value
+    now_share  = btn_share.value
+    now_encbtn = btn_enc.value
+
+    # Mute button
+    if last_mute and not now_mute:
+        send_mute_toggle()
+        mic_on = not mic_on
+        set_status_leds(mic_on, cam_on)
+        oled_status(mic_on, cam_on, sharing, volume_level)
+    last_mute = now_mute
+
+    # Leave call
+    if last_leave and not now_leave:
+        send_leave_call()
+        # You might want to reset states here if you like
+    last_leave = now_leave
+
+    # Camera toggle
+    if last_cam and not now_cam:
+        send_camera_toggle()
+        cam_on = not cam_on
+        set_status_leds(mic_on, cam_on)
+        oled_status(mic_on, cam_on, sharing, volume_level)
+    last_camera = now_cam
+
+    # Screen share
+    if last_share and not now_share:
+        send_share_toggle()
+        sharing = not sharing
+        oled_status(mic_on, cam_on, sharing, volume_level)
+    last_share = now_share
+
+    # Encoder button: also mute toggle (like a push-to-mute)
+    if last_enc and not now_encbtn:
+        send_mute_toggle()
+        mic_on = not mic_on
+        set_status_leds(mic_on, cam_on)
+        oled_status(mic_on, cam_on, sharing, volume_level)
+    last_enc = now_encbtn
+
+    # ----- Rotary for volume -----
+    position = encoder.position
+    if position != last_position:
+        delta = position - last_position
+        last_position = position
+
+        if delta > 0:
+            # clockwise = volume up
+            for _ in range(delta):
+                cc.send(ConsumerControlCode.VOLUME_INCREMENT)
+                volume_level = min(100, volume_level + 2)
+        elif delta < 0:
+            # counter-clockwise = volume down
+            for _ in range(-delta):
+                cc.send(ConsumerControlCode.VOLUME_DECREMENT)
+                volume_level = max(0, volume_level - 2)
+
+        oled_status(mic_on, cam_on, sharing, volume_level)
+
+    time.sleep(0.01)
