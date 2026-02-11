@@ -47,16 +47,12 @@ I wanted a quick way to mute myself, leave calls, and toggle video without hunti
 | SK6812 MINI-E LED | 2 | RGB lights |
 | USB-C Cable | 1 | For programming |
 
-## 3D Printed
+<img width="679" height="512" alt="Screenshot 2026-02-11 212611" src="https://github.com/user-attachments/assets/0c549c2d-6615-4055-a4f4-e2c4728bc10b" />
+<img width="1316" height="836" alt="Screenshot 2026-02-11 212558" src="https://github.com/user-attachments/assets/2d9839f5-f6ed-4ebf-b1b5-18a06578c084" />
+<img width="1372" height="751" alt="image" src="https://github.com/user-attachments/assets/ccf9ca14-e554-41a5-a248-8f0c2fd4a439" />
 
-| Part | Qty |
-|------|-----|
-| Case Bottom | 1 |
-| Case Top | 1 |
-<img width="1186" height="796" alt="image" src="https://github.com/user-attachments/assets/86c1d77b-93d8-450e-acd4-4c5583ef56d4" />
-<img width="757" height="423" alt="image" src="https://github.com/user-attachments/assets/7c55ffd9-3023-44f2-88af-ad0ee6636174" />
-<img width="1407" height="772" alt="image" src="https://github.com/user-attachments/assets/46c12222-0a1d-4684-b867-7fd4492058df" />
-<img width="1472" height="683" alt="image" src="https://github.com/user-attachments/assets/1ccc5139-fb55-4eae-8005-ccb99db0fdb3" />
+
+
 
 
 
