@@ -10,11 +10,3 @@
 | SSD1306 OLED 128x64 | 1 | Display |
 | SK6812 MINI-E LED | 2 | RGB lights |
 | USB-C Cable | 1 | For programming |
-
-## 3D Printed
-
-| Part | Qty |
-|------|-----|
-| Case Bottom | 1 |
-| Case Top | 1 |
-
