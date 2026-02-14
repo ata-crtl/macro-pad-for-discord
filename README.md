@@ -6,22 +6,32 @@ A customdesigned discordmacro keyboard with complete PCB design. Features includ
 
 I created this discord macro keyboard to streamline my discord experience during gaming sessions and streaming. Having dedicated physical buttons for common discord commands removes the need to alt-tab or memorize  keyboard shortcuts  allowing me to stay focused in-game while maintaining communication with my team and Community.
 
-## Bill of Materials (BOM)
+# Bill of Materials (BOM)
 
-| Part | Quantity | Description | Link |
-|------|----------|-------------|------|
-| ATmega32U4 Microcontroller | 1 | Arduino Leonardo-compatible microcontroller with USB HID support | [Adafruit ATmega32U4](https://www.adafruit.com/product/5099) |
-| Mechanical Switches (Gateron Red) | 12 | Linear switches ideal for gaming, 45g actuation force | [SerpentKeys UK](https://www.serpentkeys.co.uk) or [Mechboards UK](https://mechboards.co.uk/collections/switches) |
-| Keycaps (Cherry Profile) | 12 | PBT keycaps for durability and texture | [SerpentKeys UK](https://www.serpentkeys.co.uk) |
-| PCB | 1 | Custom-designed circuit board | [JLCPCB](https://jlcpcb.com/) (UK shipping available) |
-| Diodes (1N4148) | 12 | Signal diodes for keyboard matrix | [Adafruit 1N4148 SMD](https://www.adafruit.com/product/5099) or [Etsy UK](https://www.etsy.com/listing/1551503976/1n4148-smd-diodes-10pcs-for-mechanical) |
-| USB-C Connector | 1 | USB Type-C receptacle for modern connectivity | [Amazon UK](https://www.amazon.co.uk) |
-| 10kΩ Resistors | 10 | Pull-up resistors for keyboard matrix | [Amazon UK](https://www.amazon.co.uk) |
-| 0.1µF Capacitors | 2 | Decoupling capacitors for stable power | [Amazon UK](https://www.amazon.co.uk) |
-| 330Ω Resistor | 1 | Current limiting resistor for indicator LED | [Amazon UK](https://www.amazon.co.uk) |
-| LED (Red) | 1 | Power indicator LED | [Amazon UK](https://www.amazon.co.uk) |
-| Header Pins | 1 set | For programming and connections | [Amazon UK](https://www.amazon.co.uk) |
-| 5V Regulator (Optional) | 1 | If using external power | [Amazon UK](https://www.amazon.co.uk) |
+Ataullah Macro Pad - Discord Control Deck
+
+| Qty | Component | Part Number | Description | Link/Notes |
+|-----|-----------|-------------|-------------|-----------|
+| 1 | Seeed XIAO RP2040 | - | Unsoldered microcontroller board | [Seeed Wiki](https://wiki.seeedstudio.com/XIAO-RP2040/) |
+| 4 | MX-Style Switches | - | Mechanical keyboard switches for macro keys (SW1-SW4) | Mechanical switch footprint compatible |
+| 2 | EC11 Rotary Encoder | EC11 | Push-button rotary encoder for volume control | Hackaday/Aliexpress |
+| 20 | 1N4148 Diode | 1N4148 | Through-hole protection diodes | Standard component |
+| 1 | OLED Display | SSD1306 | 0.91" 128x32 I²C OLED display (GND-VCC-SCL-SDA) | [Seeed Store](https://www.seeedstudio.com/) |
+| 16 | SK6812 MINI-E LED | SK6812MINI-E | Addressable RGB LEDs (2 on PCB, rest for future) | **Important: Use MINI-E, not standard SK6812** |
+| 16 | DSA Keycaps | - | White blank keycaps for MX switches | Standard 1u keycaps |
+| 4 | M3x16mm Screw | - | Case assembly fasteners | Stainless steel |
+| 4 | M3x5mmx4mm Heat-set Insert | - | Threaded inserts for 3D-printed case | [AliExpress Example](https://www.aliexpress.us/item/2255800046543591.html) |
+
+## Key Notes
+- **LED Footprint:** Must be SK6812 **MINI-E** (not standard SK6812 mini)
+- **OLED Pin Order:** GND-VCC-SCL-SDA (critical - verify PCB matches)
+- **Total Key Capacity:** Designed for 4 keys + 1 encoder, but can support up to 16 keys with additional switches
+- **All parts are from the official Hackpad approved kit**
+
+## Sources
+- Hackpad Approved Parts: https://blueprint.hackclub.com/hackpad/parts
+- Component datasheets available in `/datasheets` folder
+
 
 
 <img width="1227" height="800" alt="image" src="https://github.com/user-attachments/assets/5e1e26c7-61e9-4c83-a89f-01a7db8b9be1" />
