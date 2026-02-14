@@ -1,0 +1,23 @@
+%TF.GenerationSoftware,KiCad,Pcbnew,9.0.7*%
+%TF.CreationDate,2026-02-07T12:31:03+00:00*%
+%TF.ProjectId,micro discord board,6d696372-6f20-4646-9973-636f72642062,rev?*%
+%TF.SameCoordinates,Original*%
+%TF.FileFunction,Profile,NP*%
+%FSLAX46Y46*%
+G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
+G04 Created by KiCad (PCBNEW 9.0.7) date 2026-02-07 12:31:03*
+%MOMM*%
+%LPD*%
+G01*
+G04 APERTURE LIST*
+%TA.AperFunction,Profile*%
+%ADD10C,0.050000*%
+%TD*%
+G04 APERTURE END LIST*
+D10*
+X73818750Y-35718750D02*
+X145256250Y-35718750D01*
+X145256250Y-92868750D01*
+X73818750Y-92868750D01*
+X73818750Y-35718750D01*
+M02*
