@@ -1,14 +1,21 @@
- Part | Quantity | Description | Link |
-|------|----------|-------------|------|
-| ATmega32U4 Microcontroller | 1 | Arduino Leonardo-compatible microcontroller with USB HID support | [Adafruit ATmega32U4](https://www.adafruit.com/product/5099) |
-| Mechanical Switches (Gateron Red) | 12 | Linear switches ideal for gaming, 45g actuation force | [SerpentKeys UK](https://www.serpentkeys.co.uk) or [Mechboards UK](https://mechboards.co.uk/collections/switches) |
-| Keycaps (Cherry Profile) | 12 | PBT keycaps for durability and texture | [SerpentKeys UK](https://www.serpentkeys.co.uk) |
-| PCB | 1 | Custom-designed circuit board | [JLCPCB](https://jlcpcb.com/) (UK shipping available) |
-| Diodes (1N4148) | 12 | Signal diodes for keyboard matrix | [Adafruit 1N4148 SMD](https://www.adafruit.com/product/5099) or [Etsy UK](https://www.etsy.com/listing/1551503976/1n4148-smd-diodes-10pcs-for-mechanical) |
-| USB-C Connector | 1 | USB Type-C receptacle for modern connectivity | [Amazon UK](https://www.amazon.co.uk) |
-| 10kΩ Resistors | 10 | Pull-up resistors for keyboard matrix | [Amazon UK](https://www.amazon.co.uk) |
-| 0.1µF Capacitors | 2 | Decoupling capacitors for stable power | [Amazon UK](https://www.amazon.co.uk) |
-| 330Ω Resistor | 1 | Current limiting resistor for indicator LED | [Amazon UK](https://www.amazon.co.uk) |
-| LED (Red) | 1 | Power indicator LED | [Amazon UK](https://www.amazon.co.uk) |
-| Header Pins | 1 set | For programming and connections | [Amazon UK](https://www.amazon.co.uk) |
-| 5V Regulator (Optional) | 1 | If using external power | [Amazon UK](https://www.amazon.co.uk) |
+
+## Bill of Materials (BOM)
+
+| Part | Quantity | Description | Source |
+|------|----------|-------------|--------|
+| **Seeed XIAO RP2040** | 1 | Approved microcontroller, QMK compatible, RP2040 @ 133MHz | [The Pi Hut](https://thepihut.com/products/seeed-xiao-rp2040) |
+| **OLED Display (0.96" I2C)** | 1 | 128x64 resolution OLED for status display | [Seeed Studio](https://www.seeedstudio.com) or [The Pi Hut](https://thepihut.com) |
+| **Rotary Encoder (20mm)** | 1 | 24-step encoder with push button, 6mm shaft | [Switch Electronics](https://www.switchelectronics.co.uk/products/20mm-rotary-encoder-with-switch-6mm-splined-shaft) |
+| **Mechanical Switches (Cherry MX)** | 4 | 4x Cherry MX compatible switches (linear/tactile) | [SerpentKeys UK](https://www.serpentkeys.co.uk/collections/switches) |
+| **Cherry Keycaps** | 4 | 4x Cherry-compatible keycaps (various colors) | [CustomKeyCaps UK](https://www.customkeycaps.co.uk) or [Overclockers UK](https://www.overclockers.co.uk/peripherals/keyboards/custom-keyboards/keycaps/pbt-keycaps) |
+| **3mm LED (Red)** | 1 | Status indicator LED | [Switch Electronics](https://www.switchelectronics.co.uk/products/3mm-leds) or [CPC UK](https://cpc.farnell.com) |
+| **3mm LED (Blue)** | 1 | Secondary status indicator LED | [Switch Electronics](https://www.switchelectronics.co.uk/products/3mm-leds) or [CPC UK](https://cpc.farnell.com) |
+| **1N4148 Diodes** | 4 | Signal diodes for keyboard matrix | [Switch Electronics](https://www.switchelectronics.co.uk/products/1n4148-small-signal-diode-100v-150ma-pack-of-10) |
+| **10kΩ Resistors (0805)** | 6 | Pull-up resistors for encoder and buttons | [Amazon UK](https://www.amazon.co.uk) |
+| **220Ω Resistors (0805)** | 2 | Current limiting for LEDs | [Amazon UK](https://www.amazon.co.uk) |
+| **0.1µF Capacitors (0805)** | 2 | Decoupling capacitors for stable power | [Amazon UK](https://www.amazon.co.uk) |
+| **PCB** | 1 | Custom 2-layer PCB with castellated pads | [JLCPCB](https://jlcpcb.com/) |
+| **M2x6mm Screws & Nuts** | 4 sets | Mounting hardware for case | [Amazon UK](https://www.amazon.co.uk) |
+| **USB-C Cable (1m)** | 1 | USB-C to USB-A cable, Anker brand | [Amazon UK](https://www.amazon.co.uk) |
+| **3D Printed Case** | 1 | Custom enclosure (PLA, self-printed or service) | [3DPrintUK](https://www.3dprint-uk.co.uk) or [MakeitQuick](https://makeitquick.co.uk) |
+| **3M VHB Tape** | 1 roll | Double-sided mounting tape for PCB | [Amazon UK](https://www.amazon.co.uk) |
