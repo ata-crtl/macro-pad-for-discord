@@ -6,26 +6,6 @@ A custom-designed Discord macro keyboard with fully assembled CAD model and comp
 
 I created this Discord macro keyboard to streamline my Discord experience during gaming sessions and streaming. Having dedicated physical buttons for common Discord commands eliminates the need to alt-tab or memorize complex keyboard shortcuts, allowing me to stay focused in-game while maintaining communication with my team and community.
 
-## How to Use This Project
-
-The keyboard features programmable macro keys that can be customized to send pre-defined Discord messages, emojis, or commands. Simply:
-1. Connect the keyboard via USB
-2. Install the firmware (if not already flashed)
-3. Press any key to send the programmed macro
-4. Use the provided configuration file to customize macros as needed
-
-## 3D Model
-
-![Full 3D CAD assembly showing the complete keyboard design with all components](3D_MODEL_IMAGE_URL)
-
-## PCB Design
-
-![PCB layout with all traces, components, and mounting points](PCB_IMAGE_URL)
-
-## Wiring Diagram
-
-![Complete wiring diagram showing connections between microcontroller, switches, and components](WIRING_DIAGRAM_URL)
-
 ## Bill of Materials (BOM)
 
 | Part | Quantity | Description | Link |
