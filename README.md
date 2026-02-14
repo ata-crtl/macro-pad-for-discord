@@ -46,9 +46,10 @@ I wanted a quick way to mute myself, leave calls, and toggle video without hunti
 | SSD1306 OLED 128x64 | 1 | Display |
 | SK6812 MINI-E LED | 2 | RGB lights |
 | USB-C Cable | 1 | For programming |
+<img width="1227" height="800" alt="image" src="https://github.com/user-attachments/assets/5e1e26c7-61e9-4c83-a89f-01a7db8b9be1" />
+<img width="720" height="511" alt="image" src="https://github.com/user-attachments/assets/612d8d1a-6c2c-45e0-ac80-5f8755db5c5f" />
 
-<img width="679" height="512" alt="Screenshot 2026-02-11 212611" src="https://github.com/user-attachments/assets/0c549c2d-6615-4055-a4f4-e2c4728bc10b" />
-<img width="1316" height="836" alt="Screenshot 2026-02-11 212558" src="https://github.com/user-attachments/assets/2d9839f5-f6ed-4ebf-b1b5-18a06578c084" />
+
 <img width="1372" height="751" alt="image" src="https://github.com/user-attachments/assets/ccf9ca14-e554-41a5-a248-8f0c2fd4a439" />
 
 
