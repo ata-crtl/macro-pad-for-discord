@@ -1,51 +1,49 @@
-# Discord Macro Board
+# Discord Macro Keyboard
 
-A compact macro keyboard designed specifically for Discord voice calls. Four programmable buttons, a rotary encoder, and an OLED display make it easy to control your Discord experience without reaching for your keyboard.
+A custom-designed Discord macro keyboard with fully assembled CAD model and complete PCB design. Features dedicated Discord shortcut keys for quick messaging and commands during gameplay or streaming.
 
-## What It Does
+## Why I Made This Project
 
-I wanted a quick way to mute myself, leave calls, and toggle video without hunting for the right Discord hotkey. This board does exactly that.
+I created this Discord macro keyboard to streamline my Discord experience during gaming sessions and streaming. Having dedicated physical buttons for common Discord commands eliminates the need to alt-tab or memorize complex keyboard shortcuts, allowing me to stay focused in-game while maintaining communication with my team and community.
 
-- **Mute button** - instantly toggle mic on/off
-- **Leave call button** - one-touch call exit
-- **Camera toggle** - switch video on/off  
-- **Screen share button** - quick sharing control
-- **Rotary encoder** - adjust volume by turning the knob
-- **OLED display** - shows what's happening in real-time
+## How to Use This Project
 
-## The Build
+The keyboard features programmable macro keys that can be customized to send pre-defined Discord messages, emojis, or commands. Simply:
+1. Connect the keyboard via USB
+2. Install the firmware (if not already flashed)
+3. Press any key to send the programmed macro
+4. Use the provided configuration file to customize macros as needed
 
-**Electronics:**
-- Seeed XIAO RP2040 microcontroller
-- 4 MX-style mechanical switches
-- EC11 rotary encoder
-- SSD1306 128x64 OLED display
-- 2 SK6812 RGB addressable LEDs
+## 3D Model
 
-**Case:**
-- 3D printed bottom and top
-- M3 screws and heatset inserts for assembly
+![Full 3D CAD assembly showing the complete keyboard design with all components](3D_MODEL_IMAGE_URL)
 
-## What I Learned
+## PCB Design
 
-- PCB design is a lot of trial and error with routing
-- OLED displays are surprisingly fun to program
-- 3D printing tolerance matters - I had to file some holes bigger
-- KMK firmware is way easier than QMK for simple projects
+![PCB layout with all traces, components, and mounting points](PCB_IMAGE_URL)
 
-## Parts List
+## Wiring Diagram
+
+![Complete wiring diagram showing connections between microcontroller, switches, and components](WIRING_DIAGRAM_URL)
+
+## Bill of Materials (BOM)
+
+| Part | Quantity | Description | Link |
+|------|----------|-------------|------|
+| ATmega32U4 Microcontroller | 1 | Arduino Leonardo-compatible microcontroller with USB HID support | [Adafruit ATmega32U4](https://www.adafruit.com/product/5099) |
+| Mechanical Switches (Gateron Red) | 12 | Linear switches ideal for gaming, 45g actuation force | [SerpentKeys UK](https://www.serpentkeys.co.uk) or [Mechboards UK](https://mechboards.co.uk/collections/switches) |
+| Keycaps (Cherry Profile) | 12 | PBT keycaps for durability and texture | [SerpentKeys UK](https://www.serpentkeys.co.uk) |
+| PCB | 1 | Custom-designed circuit board | [JLCPCB](https://jlcpcb.com/) (UK shipping available) |
+| Diodes (1N4148) | 12 | Signal diodes for keyboard matrix | [Adafruit 1N4148 SMD](https://www.adafruit.com/product/5099) or [Etsy UK](https://www.etsy.com/listing/1551503976/1n4148-smd-diodes-10pcs-for-mechanical) |
+| USB-C Connector | 1 | USB Type-C receptacle for modern connectivity | [Amazon UK](https://www.amazon.co.uk) |
+| 10kΩ Resistors | 10 | Pull-up resistors for keyboard matrix | [Amazon UK](https://www.amazon.co.uk) |
+| 0.1µF Capacitors | 2 | Decoupling capacitors for stable power | [Amazon UK](https://www.amazon.co.uk) |
+| 330Ω Resistor | 1 | Current limiting resistor for indicator LED | [Amazon UK](https://www.amazon.co.uk) |
+| LED (Red) | 1 | Power indicator LED | [Amazon UK](https://www.amazon.co.uk) |
+| Header Pins | 1 set | For programming and connections | [Amazon UK](https://www.amazon.co.uk) |
+| 5V Regulator (Optional) | 1 | If using external power | [Amazon UK](https://www.amazon.co.uk) |
 
 
-## Main Components
-
-| Part | Qty | Notes |
-|------|-----|-------|
-| Seeed XIAO RP2040 | 1 | Microcontroller |
-| MX Switch (Cherry MX compatible) | 4 | Mechanical switches |
-| EC11 Rotary Encoder | 1 | Volume knob |
-| SSD1306 OLED 128x64 | 1 | Display |
-| SK6812 MINI-E LED | 2 | RGB lights |
-| USB-C Cable | 1 | For programming |
 <img width="1227" height="800" alt="image" src="https://github.com/user-attachments/assets/5e1e26c7-61e9-4c83-a89f-01a7db8b9be1" />
 <img width="720" height="511" alt="image" src="https://github.com/user-attachments/assets/612d8d1a-6c2c-45e0-ac80-5f8755db5c5f" />
 
