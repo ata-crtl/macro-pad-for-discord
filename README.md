@@ -1,10 +1,10 @@
 # Discord Macro Keyboard
 
-A custom-designed Discord macro keyboard with fully assembled CAD model and complete PCB design. Features dedicated Discord shortcut keys for quick messaging and commands during gameplay or streaming.
+A customdesigned discordmacro keyboard with complete PCB design. Features include ,discord shortcut keys for quick messaging and commands during gameplay or streaming.
 
 ## Why I Made This Project
 
-I created this Discord macro keyboard to streamline my Discord experience during gaming sessions and streaming. Having dedicated physical buttons for common Discord commands eliminates the need to alt-tab or memorize complex keyboard shortcuts, allowing me to stay focused in-game while maintaining communication with my team and community.
+I created this discord macro keyboard to streamline my discord experience during gaming sessions and streaming. Having dedicated physical buttons for common discord commands removes the need to alt-tab or memorize  keyboard shortcuts  allowing me to stay focused in-game while maintaining communication with my team and Community.
 
 ## Bill of Materials (BOM)
 
