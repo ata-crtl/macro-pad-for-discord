@@ -36,6 +36,8 @@ I created this discord macro keyboard to streamline my discord experience during
 
 
 <img width="1372" height="751" alt="image" src="https://github.com/user-attachments/assets/ccf9ca14-e554-41a5-a248-8f0c2fd4a439" />
+<img width="898" height="541" alt="Screenshot 2026-02-16 171548" src="https://github.com/user-attachments/assets/7c7389dd-e62e-4693-9c3b-351cd4744fd0" />
+
 
 
 
